@@ -77,3 +77,17 @@ install: all
 	cp -r test/*.fst $(PREFIX)/share/krml/examples
 	mkdir -p $(PREFIX)/share/krml/misc
 	cp -r misc/* $(PREFIX)/share/krml/misc
+
+# Install without krmllib verification (for fstar2 compatibility)
+install-minimal: minimal
+	@if [ x"$(PREFIX)" = x ]; then echo "please define PREFIX"; exit 1; fi
+	mkdir -p $(PREFIX)/bin
+	cp _build/default/src/Karamel.exe $(PREFIX)/bin/krml
+	mkdir -p $(PREFIX)/include
+	cp -r include/* $(PREFIX)/include
+	mkdir -p $(PREFIX)/lib/krml
+	cp -r krmllib/* $(PREFIX)/lib/krml
+	mkdir -p $(PREFIX)/lib/krml/runtime
+	cp -r runtime/* $(PREFIX)/lib/krml/runtime
+	mkdir -p $(PREFIX)/share/krml/misc
+	cp -r misc/* $(PREFIX)/share/krml/misc
